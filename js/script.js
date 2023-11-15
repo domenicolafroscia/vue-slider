@@ -27,8 +27,11 @@ createApp({
                 }
             ],
             activeIndex: 0,
-
+            timer: null,
         };
+    },
+    created() {
+        this.startAutoplay();
     },
     methods: {
         showNext: function() {
@@ -44,7 +47,14 @@ createApp({
             } else {
                 this.activeIndex--;
             }
-         }
+        },
+        stopAutoplay: function () {
+            clearInterval(this.timer);
+            this.timer = null;
+        },
+        startAutoplay: function () {
+            this.timer = setInterval(this.showNext, 3000)
+        },
       },
 }).mount("#app");
 
